@@ -1,5 +1,5 @@
 import React from "react";
-
+import "./ToDoList.css";
 
 function ToDoList(){
     return (
@@ -10,19 +10,19 @@ function ToDoList(){
                 type="text"
                 placeholder="Digite suas tarefas"
                 />
-                <button type="submit">Add</button>
+                <button className="add" type="submit">Add</button>
             </form>
             <div className="listaTarefas">
                 <div className="item">
                     <span>Tarefa de exemplo</span>
-                    <button>Deletar</button>
+                    <button className="del">Deletar</button>
                 </div>
 
                 <div className="item completo">
                     <span>Tarefa de exemplo</span>
-                    <button>Deletar</button>
+                    <button className="del">Deletar</button>
                 </div>
-                <button>Deletar Tudo</button>
+                <button className="deleteAll">Deletar Tudo</button>
             </div>
         </div>
     )
