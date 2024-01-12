@@ -75,7 +75,11 @@ function ToDoList(){
                             </div>
                         ))
                     }
-                    <button className="deleteAll">Deletar Tudo</button>
+                    {
+                        // Renderiza o botão 'Deletar Tudo' apenas se a lista tiver itens
+                        lista.length > 0 &&
+                        <button className="deleteAll">Deletar Tudo</button>
+                    }
                 </div>
             </div>
         </div>
