@@ -34,6 +34,16 @@ function ToDoList(){
         setLista(listaAux);
     }
 
+    function deletaItem(index){
+        const listaAux = [...lista];
+
+        // Remove 1 item, pegando pelo indice do item
+        listaAux.splice(index, 1);
+
+        // Atualiza o estado 'lista' com a nova lista após a exclusão
+        setLista(listaAux);
+    }
+
     return (
         <div>
             <h1>Lista de Tarefas</h1>
@@ -61,7 +71,7 @@ function ToDoList(){
                                 key={index}
                                 className={item.isCompleted ? "item completo" : "item"}>
                                 <span onClick={()=>{clicou(index)}}>{item.text}</span>
-                                <button className="del">Deletar</button>
+                                <button onClick={()=>{deletaItem(index)}} className="del">Deletar</button>
                             </div>
                         ))
                     }
