@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./ToDoList.css";
+import icon from './assets/icon.webp'
 
 function ToDoList(){
 
@@ -36,12 +37,12 @@ function ToDoList(){
                 <button className="add" type="submit">Add</button>
             </form>
             <div className="listaTarefas">
-                <div>
+                <div style={{textAlign: "center"}}>
                     {
                         // Renderiza uma imagem se a lista estiver vazia; caso contrário, mapeia a lista renderizando os itens em 'span'
                         lista.length < 1
                         ?
-                        <img />
+                        <img src={icon} />
                         :
                         lista.map((item, index)=>(
                             // Recebe classe "item completo" se 'isCompleted' for verdadeiro, caso contrário, renderiza com a classe "item".
