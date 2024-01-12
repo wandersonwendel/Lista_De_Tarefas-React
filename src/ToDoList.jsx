@@ -44,6 +44,10 @@ function ToDoList(){
         setLista(listaAux);
     }
 
+    function deletaTudo(){
+        setLista([]);
+    }
+
     return (
         <div>
             <h1>Lista de Tarefas</h1>
@@ -78,7 +82,7 @@ function ToDoList(){
                     {
                         // Renderiza o botão 'Deletar Tudo' apenas se a lista tiver itens
                         lista.length > 0 &&
-                        <button className="deleteAll">Deletar Tudo</button>
+                        <button onClick={()=>{deletaTudo()}} className="deleteAll">Deletar Tudo</button>
                     }
                 </div>
             </div>
