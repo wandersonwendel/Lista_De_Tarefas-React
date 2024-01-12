@@ -23,6 +23,17 @@ function ToDoList(){
         document.getElementById('input-entrada').focus();
     }
 
+    function clicou(index){
+        // Cópia de 'lista'
+        const listaAux = [...lista];
+
+        // Altera o estado 'isCompleted' do item, no índice 'index' clicado
+        listaAux[index].isCompleted = !listaAux[index].isCompleted;
+        
+        // Atualiza o estado 'lista' com a nova lista modificada
+        setLista(listaAux);
+    }
+
     return (
         <div>
             <h1>Lista de Tarefas</h1>
@@ -45,9 +56,11 @@ function ToDoList(){
                         <img src={icon} />
                         :
                         lista.map((item, index)=>(
-                            // Recebe classe "item completo" se 'isCompleted' for verdadeiro, caso contrário, renderiza com a classe "item".
-                            <div className={item.isCompleted ? "item completo" : "item"}>
-                                <span>{item.text}</span>
+                            // Recebe classe "item completo" se 'isCompleted' for 'true'. Se 'false', recebe a classe "item" para os estilos css.
+                            <div 
+                                key={index}
+                                className={item.isCompleted ? "item completo" : "item"}>
+                                <span onClick={()=>{clicou(index)}}>{item.text}</span>
                                 <button className="del">Deletar</button>
                             </div>
                         ))
