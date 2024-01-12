@@ -1,14 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./ToDoList.css";
 import icon from './assets/icon.webp'
 
 function ToDoList(){
 
-    // Estado para armazenar a lista de itens
-    const[lista, setLista] = useState([]);
+    // Saber se já temos uma lista salva, salvando numa chave 'Lista' criada
+    const listaStorage = localStorage.getItem('Lista');
+
+    // Inicializando o estado 'lista' com os dados armazenados convertidos em objeto ou uma lista vazia se não houver alguma lista
+    const[lista, setLista] = useState(listaStorage ? JSON.parse(listaStorage) : []);
 
     // Estado para controlar a entrada de um novo item
     const [novoItem, setNovoItem] = useState("");
+
+    // Para toda alteração no estado da 'lista' monitorado, seja salvo no localStorage do navegador
+    useEffect(()=>{
+        // salvando os itens no localStorage, convertendo para texto, como é recebido
+        localStorage.setItem('Lista', JSON.stringify(lista));
+    }, [lista])
 
     function adicionaItem(form){
         // Impede o comportamento padrão do navegador de recarregar a página quando o formulário é enviado
