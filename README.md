@@ -15,7 +15,7 @@ Em React, usamos uma extensão de sintaxe chamada JSX para criar interfaces de u
 
 Quando você vê algo como &lt;h1&gt;Olá, mundo!&lt;/h1&gt; em um arquivo React, na verdade, é JSX, não HTML. Mas, quando o código é executado, o React converte o JSX em JavaScript puro.
 
-### Nosso exemplo:
+### Exemplo:
 ```jsx
 function ToDoList(){
   return(
@@ -387,4 +387,233 @@ Aqui, vamos atualizar o estado da lista, porém como um estado vazio, ou seja, r
 
 #
 
-*Continua..*
+### Vamos constuir nossos jsx, agora!
+
+Se preciso, revisite os conceitos na sessão => [JSX](#jsx)..
+
+A princípio, nossa estrutura ficaria assim:
+```jsx
+return (
+  <div>
+    :
+  </div>
+)
+```
+
+Envoltos de um **return()**, onde o restante do nosso código deve estar dentro do componente pai, nossa &lt;div&gt;. Visto que há muitos outros elementos para serem renderizados.
+
+#
+
+### Agora, vamos por partes..
+
+```jsx
+<h1>Lista de Tarefas</h1>
+<form onSubmit={adicionaItem}>
+  <input
+    id="input-entrada"
+    type="text"
+    value={novoItem}
+    onChange={(e)=>{setNovoItem(e.target.value)}}
+    placeholder="Digite suas tarefas"
+  />
+  <button className="add" type="submit">Add</button>
+</form>
+```
+Criamos um formulário com o tipo 'onSubmit' que recebe uma função **adicionaItem** e um input do tipo "texto" onde iremos informar os itens a serem adicionados na lista. Ambos trabalhados na sessão [**Função Para Adicionar Os Itens**](#função-para-adicionar-os-itens).
+
+O identificador **input-entrada**, foi tratado na função como um mecanismo de "foco", quando a página fosse recarregada, para evitar precisar clicar manualmente no input, a cada adição dos itens.
+
+A propriedade **value={novoItem}** está **associando** o valor do campo de entrada (&lt;input&gt;) ao estado novoItem. Isso significa que o valor exibido no campo de entrada será sempre o valor atual de novoItem. A alteração desse valor é controlada pela função onChange, que atualiza o estado novoItem sempre que o usuário digita algo no campo do input.
+
+**(e) => { ... }**: Esta é uma função de seta (arrow function) que recebe um argumento **(e)**, que representa o evento. No caso, o evento onChange.
+
+**e.target.value**: Se refere ao elemento que acionou o evento, e **.value** representa o valor atual desse elemento. Ou seja, **e.target.value** é o texto atualmente presente no campo de entrada do input.
+
+**setNovoItem(e.target.value)**: É uma função usada para atualizar o estado novoItem. Essencialmente, ela está atualizando o valor de novoItem para ser igual ao valor atual do campo de entrada sempre que o usuário digita algo.
+
+#
+
+<br>
+
+```jsx
+<div className="listaTarefas">
+  <div style={{textAlign: "center"}}>
+    {
+      lista.length < 1
+      ?
+      <img src={icon} />
+      :
+      lista.map((item, index)=>(
+        <div 
+          key={index}
+          className={item.isCompleted ? "item completo" : "item"}>
+          <span onClick={()=>{clicou(index)}}>{item.text}</span>
+          <button onClick={()=>{deletaItem(index)}} className="del">Deletar</button>
+        </div>
+      ))
+    }
+```
+
+Aqui, utilizamos um estilo CSS **inline** ou estilo embutido, na nossa primeira &lt;div&gt;... Mas, percebram que diferente do HTML, aqui o estilo teve que ficar dentro de dois colchetes **{ { .. } }**?
+
+No JSX, as chaves duplas (**{ { } }**) são usadas para incorporar expressões JavaScript. Quando você vê **{{** textAlign: "center" **}}**, a primeira chave dupla indica que você está inserindo uma expressão JavaScript dentro do JSX e a segunda chave dupla é usada para criar um objeto JavaScript, o qual recebe propriedades de estilo CSS.
+
+Adiante, vamos fazer uma validação por **condição ternária (? :)**:
+
+```jsx
+{
+  lista.length < 1
+  ?
+  <img src={icon} />
+  :
+  lista.map((item, index)=>(
+    .
+    .
+  ))
+}
+```
+*Eles estão entre as **{ }** porque esse é um padrão comum em JSX/React para renderização condicional.*
+
+A expressão **length** está sendo usada para verificar o comprimento (número de elementos) do array lista.
+
+( **?** ) avalia se a **operação à esquerda** ( lista.length < 1 ) é **verdadeira**. Caso o tamanho da lista seja menor que 1, renderiza a **operação à direita**, que é a nossa **imagem** que foi importada ainda na sessão [ToDoList.jsx](#todolistjsx), como "icon".
+
+( **:** ) já seria a validação contrária, ou seja, se aquela operação deu como **falsa**. Neste caso, o tamanho da lista sendo maior que 1, ou seja, já existem itens na lista, será renderizado os meus itens existentes.
+
+```jsx
+lista.map((item, index)=>(
+  <div 
+    key={index}
+    className={item.isCompleted ? "item completo" : "item"}
+  >
+    <span onClick={()=>{clicou(index)}}>{item.text}</span>
+    
+    <button onClick={()=>{deletaItem(index)}} className="del">Deletar</button>
+  </div>
+))
+```
+
+Utilizamos a função de array **map** para percorrer (iterar) cada elemento do array lista.
+Ou seja, para cada elemento no array lista, a função de mapeamento é chamada. 
+
+Essa função recebe dois parâmetros:
+- **item**: O valor do elemento atual no array.
+- **index**: A posição do elemento no array.
+
+Com isso, para cada item, ele renderiza uma div com um key único "**index**" (usado para identificar exclusivamente cada elemento durante as atualizações de renderização).
+
+<br>
+
+Aqui, confesso que no início até eu buguei um pouco, pela interligação dessas duas partes:
+```javascript
+className={item.isCompleted ? "item completo" : "item"}
+>
+  <span onClick={()=>{clicou(index)}}>{item.text}</span>
+``` 
+
+Mas, vamos lá.... 
+
+#
+
+Lá na [função para adicionar itens](#função-para-adicionar-os-itens), espeficicamente nesta parte:
+
+```javascript
+setLista([...lista, {text: novoItem, isCompleted: false }])
+```
+
+Vemos que uma propriedade chamada **isCompleted** foi criada para cada novo item adicionado, após a atualização do estado da lista, com o **setLista...**
+
+#
+
+Agora podemos voltar...
+
+```javascript
+className={item.isCompleted ? "item completo" : "item"}
+>
+  <span onClick={()=>{clicou(index)}}>{item.text}</span>
+```
+
+A operação condicional ternária irá atribuir à nossa &lt;div&gt;, a classe **completo** ou a classe **item**, baseando-se no **estado booleano atual** da propriedade **isComleted** (que, como vimos, é **false**).
+
+Ou seja, a condção ternária dará **item**, pois **isCompleted** está como **false**. Contendo estes estilos CSS:
+
+```css
+.item{
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid #363b65;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+```
+
+<br>
+
+Acontece que, a mudança dessa operação condicional, também irá depender do nosso segundo elemento, o &lt;span&gt;, o qual exibe o texto da tarefa, atravéz do **{item.text}**.
+
+*A propriedade **text**, presente na [função de adicionar os itens](#função-para-adicionar-os-itens), onde **text** recebe o valor de **novoItem**. Ou seja, o texto do input vinculado a essa propriedad **text**.* 
+
+O evento de clique, **onClick()**, traz uma arrow funtion que aciona nossa [função de clique],(#cliquemarcação-de-itens-como-concluídos) no &lt;span&gt;.
+
+```jsx
+function clicou(index){
+.
+.
+  listaAux[index].isCompleted = !listaAux[index].isCompleted;
+.
+.
+}
+```
+Com isso, isCompleted, que era **false**, passa para **true**. Nisso o react re-renderiza e a condição ternária da **true**, passando a className para **item.completo**. Recebendo estes estilos CSS:
+
+```css
+.item.completo{
+  display: flex;
+  text-align: start;
+  justify-content: space-between;
+  background: #1e1f2e;
+  border: none;
+  margin-bottom: 10px;
+  cursor: pointer;
+  opacity: 0.4;
+}
+```
+Essas mudanças, juntamente com o propósito da **função clicou**,  é para "marcarmos" algum determinado item da lista como **concluído**, deixando aquele item riscado e meio transparente.
+
+#
+
+<br>
+
+Concluindo, temos mais uma operação ternária em jsx que usamos só para ocultar o botão **Deletar Tudo**.
+
+```js
+        {
+          lista.length > 0 &&
+          <button onClick={()=>{deletaTudo()}} className="deleteAll">Deletar Tudo</button>
+        }
+      </div>
+    </div>
+  </div>
+)
+```
+Caso o tamanho de lista seja maior que zero (ou seja, há itens na lista), será renderizado o nosso botão na tela, abaixo dos itens.
+
+Caso não tenha itens, o botão não será renderizado, pois o lado direito da expressão não será avaliado.
+
+Além disso, a arrow funtion no evento de clique chama a [função para deletar todos os itens](#deletar-todos-os-itens) da lista.
+
+#
+
+<br>
+<br>
+
+<p align='center' style='font-weight:bold; font-size:20px'>Muito obrigado, por me acompanhar até aqui!</p>
+
+<br>
+<br>
+
+Contruir este projeto e todo este passo a passo, foi muito gratificante para mim. Poder repassar todo o conhecimento desta aula, que apesar de ser básica, eu reconheço como um progresso, por ser uma nova tecnologia que estou aprendendo e que me encanta. Espero que gostem, pois fiz com imenso carinho rsrs.. 
+
+Mas, calma ai!  Tá achando que já acabou?...
+
+Ainda, teremos muitos outros projetos por aqui!  
