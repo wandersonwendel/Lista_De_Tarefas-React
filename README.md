@@ -2,15 +2,50 @@
 
 Este é o meu primeiro projeto em React, desenvolvido como parte do meu aprendizado na construção de aplicações web. O projeto foi guiado pelas instruções e orientações do canal Programação Web, ministrado pelo professor Dimitri Teixeira.
 
-## Sobre o Projeto
+<h2>Sobre o Projeto</h2>
 
 O objetivo deste projeto é criar uma lista de tarefas interativa usando React, aplicando os conceitos aprendidos durante o minicurso. A construção desta aplicação me proporcionou uma compreensão inicial e mais prática do desenvolvimento front-end com React. 
 
 A orientação fornecida pelo canal Programação Web do professor Dimitri Teixeira foi fundamental para o desenvolvimento deste projeto. Os conceitos abordados no curso foram aplicados na prática, permitindo um aprendizado mais efetivo para quem está começando no React e suas funcionalidades.
 
-## Entendendo a estrutura básica de código em React
+<br>
 
-### JSX
+<h1>Entendendo a estrutura básica de código em React</h1>
+
+<p style='font-size:25px; font-weight:bold;'>Componentes</p>
+
+No React, componentes são pedaços de códigos que representam partes de uma interface de usuário (UI) e podem ser reutilizados em várias partes da aplicação.
+
+Durante os estudos, foram apresentados dois tipos de componentes em react:
+
+### Componente de Classe
+Onde uma classe **MeuComponente** extende um componente da biblioteca React (lembrando das importações logo acima da classe) que renderiza/apresenta no novegador um tipo de retorno HTML(no caso, chamamos de **jsx**).
+```jsx
+import React, { Component } from 'react';
+
+class MeuComponente extends Component {
+  render(){
+    return <h1>Hello World!</h1>
+  }
+}
+
+export default MeuComponente;
+```
+
+### Componenete Funcional
+Atualmente, o mais usado. São basicamente funções JavaScript que renderizam/apresentam no novegador um tipo de retorno HTML(no caso, chamamos **jsx**).
+```jsx
+function MeuComponente(){
+  return <h1>Hello World!</h1>
+}
+
+export default MeuComponente;
+```
+
+#
+
+<br>
+<p style='font-size:25px; font-weight:bold;'>JSX</p>
 Em React, usamos uma extensão de sintaxe chamada JSX para criar interfaces de usuário de forma mais fácil. JSX é como uma mistura de JavaScript com HTML, permitindo que escrevamos código que parece HTML diretamente dentro do JavaScript. Isso deixa nosso código mais limpo e fácil de entender.
 
 Quando você vê algo como &lt;h1&gt;Olá, mundo!&lt;/h1&gt; em um arquivo React, na verdade, é JSX, não HTML. Mas, quando o código é executado, o React converte o JSX em JavaScript puro.
@@ -31,9 +66,8 @@ function ToDoList(){
 
 export default ToDoList
 ```
-<p style="opacity: 0.5; font-size: 10px; text-align: center">Boa prática: Nome de componente começar sempre com letra maiúscula.</p>
 
-Percebem que as tegs **HTML** estão entre parenteses, dentro do **return**?
+Percebem que as **tags HTML** estão entre parenteses e envoltos de uma &lt;div&gt;, dentro do **return**?
 
 ```jsx
 return(*
@@ -50,60 +84,28 @@ Em JSX, ao renderizar múltiplos elementos (h1, form, input e button) em um comp
 
 #
 
-### Componentes
-No React, componentes são pedaços de códigos que representam partes de uma interface de usuário (UI) e podem ser reutilizados em várias partes da aplicação.
-
-Durante os estudos, foram apresentados dois tipos de componentes em react:
-
-### Componente de Classe
-Onde uma classe **MeuComponente** extende um componente da biblioteca React (lembrando das importações logo acima da classe) que renderiza/apresenta no novegador um tipo de retorno HTML.
-```jsx
-import React, { Component } from 'react';
-
-class MeuComponente extends Component {
-  render(){
-    return <h1>Hello World!</h1>
-  }
-}
-
-export default MeuComponente;
-```
-
-### Componenete Funcional
-Atualmente, o mais usado. São basicamente funções JavaScript que retornam um HTML.
-```jsx
-function MeuComponente(){
-  return <h1>Hello World!</h1>
-}
-
-export default MeuComponente;
-```
 <br>
 
-#
+<p style='font-size:25px; font-weight:bold;'>Hooks</p>
 
-### Hooks
-Os hooks são funções que foram introduzidos na versão 16.8 do React para permitir que componentes funcionais (em oposição aos componentes de classe) tenham estado (state) e possam utilizar funcionalidades específicas do React, como efeitos colaterais, de uma maneira mais direta.
+Os hooks são funções especiais que te permitem utilizar recusos do React. Permitindo, por exemplo, que componentes funcionais (em oposição aos componentes de classe) tenham estado **(state)** e possam utilizar funcionalidades específicas do React, como efeitos colaterais **(useEffect)**, de uma maneira mais direta. 
 
-Trazendo um bônus aqui, porque vamos usar dois deles: 
+### useState:
 
-**useState**:
-
-O useState é utilizado para adicionar estado a componentes funcionais.
-Ele retorna um array com dois elementos: o estado atual e uma função para atualizar esse estado, usando prefico 'set' juntamento do mesmo nome do estado atual: setEstadoAtual.
+O **useState** retorna um **array** com dois elementos: o **estado atual** e uma **função para atualizar** esse estado, usando o prefixo **'set'**, juntamento do mesmo nome do estado atual **(setEstadoAtual)**.
 
 Ex:
-```js
+```jsx
 import React, { useState, useEffect } from 'react';
 const [count, setCount] = useState(0);
 ```
-Neste exemplo, count é o estado atual e setCount é uma função para atualizar esse estado. O useState aceita um argumento inicial, que é o valor inicial do estado.
+Neste exemplo, **count** é o estado atual e **setCount** é uma função para atualizar esse estado. O useState aceita um argumento inicial, que é o valor inicial do estado.
 
-**useEffect**:
-O useEffect é utilizado para realizar efeitos colaterais em componentes funcionais, após alguma mudança no **estado** do componente. Efeitos colaterais incluem coisas como buscar dados, manipular o DOM, assinar eventos, etc.
+### useEffect:
+O **useEffect** realiza efeitos colaterais, após alguma mudança no **estado** do componente. Efeitos colaterais incluem buscar dados, manipular o DOM manualmente dentro dos componentes, assinar eventos, etc.
 
 Ex:
-```js
+```jsx
 import React, { useState, useEffect } from 'react';
 const [count, setCount] = useState(0);
 
@@ -123,13 +125,15 @@ const [count, setCount] = useState(0);
 .
 ```
 #
-Aqui, é para identificarmos qual estado que será monitorado:
+Aqui, é para identificarmos qual elemento será monitorado:
 ```js
 }, [count])
 ```
+No exemplo acima, cada vez que o botão "Incrementar" é clicado, o estado de **count** é atualizado usando a função **setCount**. Com essa mudança do estado de **count**, o useEffect é acionado, passando o valor atual de count a cada clique/mudança de estado..
 
-Neste exemplo todo acima, cada vez que o botão "Incrementar" é clicado, o estado count é atualizado usando a função setCount. Com essa mudança de estado de **count**, o useEffect é acionado, passando o valor atual de count a cada clique/mudança de estado..
-#
+<br>
+<br>
+
 
 <h1 align='center'>Estrutura do nosso código</h1>
 
@@ -598,9 +602,9 @@ Concluindo, temos mais uma operação ternária em jsx que usamos só para ocult
 ```
 Caso o tamanho de lista seja maior que zero (ou seja, há itens na lista), será renderizado o nosso botão na tela, abaixo dos itens.
 
-Caso não tenha itens, o botão não será renderizado, pois o lado direito da expressão não será avaliado.
+Caso não tenha itens, o botão não será renderizado, pois o lado direito da expressão não será avaliado. Levando para aquela condição ternária de renderizar uma imagem, já que não tem itens .
 
-Além disso, a arrow funtion no evento de clique chama a [função para deletar todos os itens](#deletar-todos-os-itens) da lista.
+Além disso, a arrow funtion no evento de clique chama a [função para deletar todos os itens](#deletar-todos-os-itens) da lista, ao clicarmos no botão.
 
 #
 
@@ -612,7 +616,7 @@ Além disso, a arrow funtion no evento de clique chama a [função para deletar 
 <br>
 <br>
 
-Contruir este projeto e todo este passo a passo, foi muito gratificante para mim. Poder repassar todo o conhecimento desta aula, que apesar de ser básica, eu reconheço como um progresso, por ser uma nova tecnologia que estou aprendendo e que me encanta. Espero que gostem, pois fiz com imenso carinho rsrs.. 
+Construir este projeto e todo este passo a passo, foi muito gratificante para mim. Poder repassar todo o conhecimento desta aula, que apesar de ser básica, eu reconheço como um progresso, por ser uma nova tecnologia que estou aprendendo e que me encanta. Espero que gostem, pois fiz com imenso carinho rsrs.. 
 
 Mas, calma ai!  Tá achando que já acabou?...
 
