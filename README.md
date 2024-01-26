@@ -8,6 +8,63 @@ O objetivo deste projeto é criar uma lista de tarefas interativa usando React, 
 
 A orientação fornecida pelo canal Programação Web do professor Dimitri Teixeira foi fundamental para o desenvolvimento deste projeto. Os conceitos abordados no curso foram aplicados na prática, permitindo um aprendizado mais efetivo para quem está começando no React e suas funcionalidades.
 
+#
+
+Antes de apresentarmos a estrutura básica de trabalhar com react, vamos falar um pouco sobre o Vite, uma ferramenta de desenvolvimento rápida para criação de aplicativos web modernos, especificamente, para projetos baseados em React, Vue.js e outros.
+
+Vite se destaca por sua capacidade de iniciar o servidor de desenvolvimento e construir os arquivos rapidamente, o que é crucial para a produtividade do desenvolvedor durante o ciclo de desenvolvimento. Proporcionando uma instalação mais rápida de tudo o que iremos precisar no ambiente React.
+
+Diferente dos modelos antidos como o 'npx creat react app' para constuir um ambiente react que tinham recursos mais lentos.
+
+Para acessar o site: https://vitejs.dev/
+
+ Além disso, tivemos um passo importante, na aula, sobre organização das pastas onde estará o projeto completo. Então, antes de usarmos o comando para a criação do App, vamos seguir:
+  - Copie o caminho da pasta onde estará seu projeto (Seria legal uma pasta com o prórpio nome 'react' ou 'projetos react'; e
+  - No prompt de comando, acesse esta pasta com o comando: cd (cole o caminho da pasta aqui).
+
+#
+
+### Utilizando o Vite
+
+Pronto! Agora, após ir em 'Get Started', no site do Vite, e descer até o processo de instalação de um projeto react, você irá se deparar com este comando do Vite de exemplo:
+
+```bash
+npm create vite@latest my-vue-app -- --template vue
+```
+
+Só que é um exemplo para projeto Vue.js. Então vamos usá-lo para projeto react, alterando desta forma:
+
+```bash
+npm create vite@latest nome_do_seu_projeto -- --template react
+```
+
+**npm**:gerenciador de pacotes padrão para o Node.js. Ele é usado para instalar, compartilhar e gerenciar pacotes ou módulos de JavaScript, que podem ser utilizados em projetos. Esse comando instalará as dependências necessárias e configurará o ambiente de desenvolvimento para você começar a trabalhar em seu projeto React rapidamente.
+
+**npm create**: Este é o comando do npm que permite criar um novo projeto a partir de um template.
+
+**vite@latest**: Aqui, você está especificando o pacote Vite e solicitando a instalação da versão mais recente disponível.
+
+**nome_do_seu_projeto**: Este é o nome que você dá ao seu projeto. Ele criará um diretório com esse nome e configurará o projeto dentro dele.
+
+**--template react**: Este é um argumento passado para o Vite, indicando que você deseja criar um novo projeto React com o Vite.
+
+Após executar o comando, irá aparecer na tela do prompt uma sequencia de passos pra você entrar no diretório do seu projeto: "cd nome_do_seu_projeto", e enter.
+
+Para avançarmos com os outros passos, seria melhor irmos executá-los no VsCode logo ou alguma outra IDE da sua preferência. Então usamos o comando: "code ." (não esqueça o "." kk)
+
+Os outros 2 passos a seguirmos, já dentro do terminal do VsCode, são:
+```bash
+npm install  // Que irá instalar todas as dependências do vite
+
+npm run dev  // Para rodarmos este ambiente e nosso projeto incial, abrindo o servidor
+```
+
+ ### Nesta parte de rodar o projeto e acessar o servidor, estava aparecendo um erro para mim. Uma dependência faltando chamada "@rollup/rollup-win32-x64-msvc", do Vite. Parece ser um problema já conhecido e associado a uma falha na instalação de dependências opcionais no npm.
+
+Após umas pesquisas, me recomendaram instalar uma versão específica do Vite que pode estar compatível com as dependências necessárias, utilizando o comando: "npm install vite@4.4.0". Reseolveu o meu problema, só que é uma versão anterior.. o que não é muito legal. Talvez surja outros problemas na frente em outros projeto? Talvez..
+
+Podemos voltar a construção do projeto, agora...
+
 <br>
 
 <h1>Entendendo a estrutura básica de código em React</h1>
